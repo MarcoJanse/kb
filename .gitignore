@@ -1,0 +1,17 @@
+# Secrets and Keys
+*.key
+*.cer
+*.pem
+*.pfx
+
+# Backup files
+*.bak
+
+# logs
+*.log
+
+# Temp files
+*.tmp
+
+# Ignored vscode files
+.vscode/
