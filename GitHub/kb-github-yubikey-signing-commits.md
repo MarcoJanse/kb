@@ -227,3 +227,5 @@ git config --global gpg.program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"
 ```
 
 ### 8 Test your commit signing
+
+Now that everything has been configured, it's time to start testing. Commit something in Git while you have your Yubikey connected and you should get a prompt for your PIN, Once you've entered your PIN, your commit should get signed with your GPG signing key.
