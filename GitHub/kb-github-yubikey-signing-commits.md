@@ -229,3 +229,34 @@ git config --global gpg.program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"
 ### 8 Test your commit signing
 
 Now that everything has been configured, it's time to start testing. Commit something in Git while you have your Yubikey connected and you should get a prompt for your PIN, Once you've entered your PIN, your commit should get signed with your GPG signing key.
+
+From then on, as long as the YubiKey is plugged in, all commits will be signed. Take the YubiKey out, and commits will start failing.
+
+## Troubleshooting
+
+If your key is not inserted or you enter the wrong PIN, you will get an error message like the one below: 
+
+```bash
+gpg: signing failed: Operation cancelled
+gpg: signing failed: Operation cancelled
+error: gpg failed to sign the data
+fatal: failed to write commit object
+```
+
+If you get a message with `gpg: signing failed: No secret key`, you might want to check the path where gpg4win has been installed and update the git global configuration with the correct path for the gpg.program:
+
+```powershell
+git config --global gpg.program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"
+```
+
+## Rerefences and links
+
+I would like to thank the following blog posts and references to figure this all out:
+
+- [Signing GitHub Commits With YubiKey | den.dev](https://den.dev/blog/signing-github-commits-yubikey/)
+- [SSH Authentication to GitHub Using a YubiKey on Windows | Yubico.com](https://developers.yubico.com/PGP/SSH_authentication/Windows.html)
+- [Setting your commit email address | GitHub.com](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address)
+- [About commit signature verification | GitHub.com](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification)
+- [gpg4win](https://www.gpg4win.org/)
+- [YubiKey-Guide | drduh on GitHub](https://github.com/drduh/YubiKey-Guide#sub-keys)
+- [No secret key" error when signing git commit on Windows | Stackoverflow.com](https://stackoverflow.com/questions/61849061/no-secret-key-error-when-signing-git-commit-on-windows)
