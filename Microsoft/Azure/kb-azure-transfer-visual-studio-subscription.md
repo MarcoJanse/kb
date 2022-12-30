@@ -1,6 +1,6 @@
-# Transfer your Visual Studio Enterprise subscripion to another Azure tenant
+# Transfer your Visual Studio Enterprise subscription to another Azure tenant
 
-- [Transfer your Visual Studio Enterprise subscripion to another Azure tenant](#transfer-your-visual-studio-enterprise-subscripion-to-another-azure-tenant)
+- [Transfer your Visual Studio Enterprise subscription to another Azure tenant](#transfer-your-visual-studio-enterprise-subscription-to-another-azure-tenant)
   - [Introduction](#introduction)
   - [Best practices](#best-practices)
   - [Prerequisites](#prerequisites)
@@ -35,9 +35,13 @@ Fortunately, there is a way to move your Azure subscription to another Azure AD 
 - You need to identify which subscription is yours. If there are multiple MPN subscriptions, you should be able to find yours via [Portal settings | Directory + subscriptions](https://portal.azure.com/#settings/directory)
 - Make sure there are no resources linked to this subscription. (you can move some resources, with your subscription, but it's generally better for these kind of subscriptions to just stat over with deploying resources in the new tenant)
 - You will need account operator or owner permissions on the Visual Studio Enterprise subscription in the source tenant.
-- You need to be able to invite guests in your company's AzureAD tenant. You can find this under `Eser settings` - `External collaboration settings`
+- You need to be able to invite guests in your company's AzureAD tenant. You can find this under `User settings` - `External collaboration settings`
+
+<br>
 
 ![External collaboration settings](../../Images/kb-azure-azuread-externalcollaboration-settings.png)
+
+<br>
 
   - In my company's tenant, I had these permissions as I was a member of an administrative role and the Guest invite settings were set to `Member users and users assigned to specific admin roles can invite guest users including guests with member permissions` 
 
@@ -68,7 +72,11 @@ With all these requirements covered, lets get started!
   - Click Next and Finish
   - Your Guest user should now be able to manage this subscription
 
+<br>
+
 ![Add role assignment](../../Images/kb-azure-IAM-add-role-assignment.png)
+
+<br>
 
 ### Move the subscription to the target tenant
 
@@ -78,7 +86,11 @@ With all these requirements covered, lets get started!
 - Go to [Subscriptions blade](https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade) and select the Visual Studio Enterprise subscription you want to move.
 - This time, choose `Change directory`
 
+<br>
+
 ![Subscription options](../../Images/kb-azure-subsciption-options-change-directory.png)
+
+<br>
 
 - You should be able to select the source and target directory, as you have access to boh and subscription owner permissions
 - Initiate the move after reading and selecting the disclaimer and click on `Change`
