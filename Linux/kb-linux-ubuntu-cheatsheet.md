@@ -1,15 +1,28 @@
 # KB Linux Ubuntu cheat sheet
 
+- [KB Linux Ubuntu cheat sheet](#kb-linux-ubuntu-cheat-sheet)
+  - [Check Ubuntu version](#check-ubuntu-version)
+  - [Package management](#package-management)
+  - [apt vs apt-get commands](#apt-vs-apt-get-commands)
+    - [New apt commands that don't exist in apt-get](#new-apt-commands-that-dont-exist-in-apt-get)
+  - [Pinning packages](#pinning-packages)
+
+## Check Ubuntu version
+
+To check the Ubuntu version:
+
+`lsb_release -a`
+
 ## Package management
 
-* As usual you need to fetch an updated index from the Internet:
-  * `$ sudo apt-get update`
-* Check upgradable packages:
-  * `$ sudo apt list --upgradable`
-* To only upgrade package if installed:
-  * `$ sudo apt-get --only-upgrade install Package`
-* To install and or update single package:
-  * `$ sudo apt-get install package`
+- As usual you need to fetch an updated index from the Internet:
+  - `$ sudo apt-get update`
+- Check upgradable packages:
+  - `$ sudo apt list --upgradable`
+- To only upgrade package if installed:
+  - `$ sudo apt-get --only-upgrade install Package`
+- To install and or update single package:
+  - `$ sudo apt-get install package`
 
 ## apt vs apt-get commands
 
@@ -43,9 +56,9 @@ In the table below, see the apt command for any given function, as well as which
 If you want to pin a package to a specific version, you could do so as follows.
 For example, if you want to pin azure-cli to 2.36 but want to allow minor upgrades (like 2.36.2), do this:
 
-* Create a file for azure-cli in
-  * `sudo vim /etc/apt/preferences.d/azure.cli`
-* Add the following lines:
+- Create a file for azure-cli in
+  - `sudo vim /etc/apt/preferences.d/azure.cli`
+- Add the following lines:
 
 ```bash
 Package: azure-cli
