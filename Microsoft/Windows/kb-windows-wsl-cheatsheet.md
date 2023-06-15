@@ -1,12 +1,20 @@
 # WSL cheat sheet
 
 - [WSL cheat sheet](#wsl-cheat-sheet)
+  - [WSL command line](#wsl-command-line)
   - [Using SSH on WSL2 and KeePassXC using SSH agent](#using-ssh-on-wsl2-and-keepassxc-using-ssh-agent)
     - [Prerequisites](#prerequisites)
       - [Windows VM](#windows-vm)
         - [WSL distro](#wsl-distro)
     - [Working with GIT and GitLab repositories using SSH authentication with KeePassXC and SSH agent](#working-with-git-and-gitlab-repositories-using-ssh-authentication-with-keepassxc-and-ssh-agent)
       - [Links](#links)
+
+## WSL command line
+
+- Enter WSL session from cmd.exe or PowerShell
+  - `wsl`
+- Shutdown WSL
+  - `wsl --shutdown`
 
 ## Using SSH on WSL2 and KeePassXC using SSH agent
 
