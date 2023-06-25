@@ -62,6 +62,7 @@ The instructions below are based on the release of [Bicep v0.18.4](https://githu
   - In this case, I named the branch `feat-microsoft-bicep-v_18_4`
 - Switch to the new branch and create a new folder called `manifests\m\Microsoft\Bicep\0.18.4`
 - Copy the 3 manifest files in this folder.
+- Make sure the package version is the full build number. For example, I had submitted packageversion `0.18.4`, but when downloading the `bicep-setup-win-x64.exe` and looking at the details of the package, the *product version* was ***`0.18.4.5664`***
 - [Optional] Modify the following:
   - `Microsoft.Bicep.installer.yaml`
     - Add a `ReleaseDate: 'yyyy-MM-dd` line with the release date of this version
@@ -76,7 +77,7 @@ The instructions below are based on the release of [Bicep v0.18.4](https://githu
   - **Be sure to validate the modified manifest files in your git branch, not the original location**
   - For example:
     - `winget validate C:\git\GitHub\MarcoJanse\winget-pkgs\manifests\m\Microsoft\Bicep\0.18.4\`
-- If everything is allright, it should say *`Manifest validation succeeded`*
+- If everything is alright, it should say *`Manifest validation succeeded`*
 
 ### Test the manifest with Windows Sandbox
 
