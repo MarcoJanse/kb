@@ -10,8 +10,15 @@
     - [Create empty repository](#create-empty-repository)
       - [gitattributes file](#gitattributes-file)
       - [gitignore file](#gitignore-file)
-  - [Create a Codespace](#create-a-codespace)
-  - [Create and configure Jekyll static website using Codespaces](#create-and-configure-jekyll-static-website-using-codespaces)
+    - [Create a Codespace](#create-a-codespace)
+    - [Create and configure Jekyll static website using Codespaces](#create-and-configure-jekyll-static-website-using-codespaces)
+    - [Customize site](#customize-site)
+      - [\_config.yml](#_configyml)
+      - [Additional subdirectories](#additional-subdirectories)
+      - [about.markdown](#aboutmarkdown)
+  - [Configure DNS and GitHub pages configuration](#configure-dns-and-github-pages-configuration)
+    - [Prepare DNS](#prepare-dns)
+    - [GitHub pages configuration](#github-pages-configuration)
   - [References](#references)
 
 ## Introduction
@@ -83,7 +90,7 @@ This will make sure that certain folders and files will not be committed to your
 - [Ignoring files | GitHub Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files)
 - [A collection of .gitignore templates | GitHub](https://github.com/github/gitignore)
 
-## Create a Codespace
+### Create a Codespace
 
 - From within your repository on GitHub.
 - Using the Code menu pick the Codespaces tab and select Create.
@@ -97,7 +104,7 @@ This will make sure that certain folders and files will not be committed to your
   - `make -v`
   - `jekyll -v`
 
-## Create and configure Jekyll static website using Codespaces
+### Create and configure Jekyll static website using Codespaces
 
 - From within your codespaces, make sure you are in the root of your folder (`workspaces/<username>.github.io`) on the main branch. (At this point, you shouldn't have any sub folders or additional branches yet)
 - Create a docs folder to host your Jekyll site.
@@ -157,6 +164,132 @@ gem "webrick", "~> 1.8"
 ```
 
 > **NOTE** If the site works, do yourself a favour and commit these changes to main before making making any changes. This way, you will be able to easily revert to the original configuration and see any changes since then.
+
+### Customize site
+
+#### _config.yml
+
+In the `_config.yml`, you can set some basic settings for the site, like the title and description of your site, contact details, but also things like the them to build your site with.
+
+I've modified the following fields for now: (but I intend to change the theme later on)
+
+- title: `ICTStuff.info`
+- email: `marco.janse@ictstuff.info`
+- description: `Scribbles from a IT Engineer trying to become a DevOps engineer and conquer his Imposter Syndrome`
+- url: `"https://ictstuff.info"`
+- twitter_username: `MarcoJanse`
+- github_username: `MarcoJanse`
+- Build settings
+  - plugins:
+    + jekyll-remote-theme
+- Site settings
+  - permalink: `/:collection/:year-:month-:day-:title:output_ext`
+
+Below is the complete `_config.yml` file contents:
+
+```yaml
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+title: ICTStuff.info
+email: marco.janse@ictstuff.info
+description: >- # this means to ignore newlines until "baseurl:"
+  Scribbles from a IT Engineer trying to become a DevOps engineer and conquer his Imposter Syndrome
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://ictstuff.info" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: MarcoJanse
+github_username: MarcoJanse
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
+
+# Site settings
+permalink: /:collection/:year-:month-:day-:title:output_ext
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+```
+
+#### Additional subdirectories
+
+Under the docs directory, I created the following subdirectories:
+
+- `_drafts`
+- `assets`
+  - `images`
+
+#### about.markdown
+
+This file was updated with relevant content for an about page and I added a reference to an image, which I first uploaded to the `assets/images` by right-clicking the folder in the VSCode explorer and selecting `Upload..`
+
+Below is the code block for adding the image and resizing this:
+
+`![About Me](/assets/images/marco-simpsonized.png){:width="20%"}`
+
+## Configure DNS and GitHub pages configuration
+
+### Prepare DNS
+
+Please refer to [Configure an apex domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain) for the A-records and AAAA-records that need to be added to your domain using the registar's DNS control panel.
+
+```bash
+# A-records
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+
+# AAAA-records
+2606:50c0:8000::153
+2606:50c0:8001::153
+2606:50c0:8002::153
+2606:50c0:8003::153
+```
+
+### GitHub pages configuration
+
+- Navigate to `username.github.io` repository and go to Settings
+- From within Settings, select Pages
+- Configure your site to deploy from a branch
+  - Make sure `main` is selected as branch
+  - Make sure `/docs` is selected as folder
 
 ## References
 
