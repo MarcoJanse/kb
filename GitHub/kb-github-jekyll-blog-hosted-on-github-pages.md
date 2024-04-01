@@ -106,7 +106,7 @@ This will make sure that certain folders and files will not be committed to your
 
 ### Create and configure Jekyll static website using Codespaces
 
-- From within your codespaces, make sure you are in the root of your folder (`workspaces/<username>.github.io`) on the main branch. (At this point, you shouldn't have any sub folders or additional branches yet)
+- From within your Codespaces, make sure you are in the root of your folder (`workspaces/<username>.github.io`) on the main branch. (At this point, you shouldn't have any sub folders or additional branches yet)
 - Create a docs folder to host your Jekyll site.
   - `mkdir docs`
 - Initialize a new Jekyll project from the docs folder
@@ -114,7 +114,7 @@ This will make sure that certain folders and files will not be committed to your
   - `jekyll new --skip-bundle`
 - Open and edit the `Gemfile`
   - Comment the `gem "jekyll"` line
-  - Uncomment the `gem github-pages` line and change it to include the latest gem version of GitHub pages, which can be found on this page: [Dependency versions | GitHub Pages](https://pages.github.com/versions/). At the time of writing, this was `228`
+  - Uncomment the `gem github-pages` line and change it to include the latest gem version of GitHub pages, which can be found on this page: [Dependency versions | GitHub Pages](https://pages.github.com/versions/). At the time of writing, this was `228`. Make sure you update in your gemfile when the dependency version changes.
 - Run `bundle update` to install your dependencies. This will create `Gemfile.lock`
 - Add the webrick dependency manually, as this is no longer installed by default with Ruby 3.x
   - `bundle add webrick`
