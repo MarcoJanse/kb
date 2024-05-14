@@ -45,6 +45,8 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
   - Use this as a search filter: `is:pr is:open "bicep" in:title`
 - On the release page of Bicep v.0.18.4, find the `bicep-setup-win-x64.exe` package and copy the link for the next step
 
+> **IMPORTANT:** Make sure you copy the `bicep-setup-win-64.exe` and not the bicep-win64.exe
+
 ### Create the winget manifest files for the installer package
 
 - On your machine, open a PowerShell prompt and enter the following: `wingetcreate update --urls <link to bicep-setup-win-x64-package> --version <versionNumber> <Winget.PackageName>`, so in this case this should be:
@@ -68,7 +70,8 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
     - Add a `ReleaseDate: 'yyyy-MM-dd` line with the release date of this version
   - `Microsoft.Bicep.locale.en-US.yaml`
     - Add a `ReleaseNotes` parameter and copy the details from the releasenotes page, for example:
-      ```
+
+      ```text
       ReleaseNotes: |-
       Highlights
       Bicep Team:
@@ -94,6 +97,7 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
       - Make some minor improvements to resource filter keywords and add filter keyword support for resource snippets (#13731)
       - 13842 Bicep linter doesn't recognise managementGroupResourceId as a r… (#13889)
       ```
+
     - Add a `ReleaseNotesUrl` parameter, for example:
       - `ReleaseNotesUrl: https://github.com/Azure/bicep/releases/tag/v0.27.1`
 - Save the files and do not commit them yet.
@@ -133,6 +137,10 @@ Manifest validation succeeded.
     - Refreshing environment variables
     - Comparing ARP Entries
 ```
+
+Below is a screenshot of the sandbox and it's output if everything works.
+
+![Windows Sandbox Winget installation of Microsoft.Bicep](../../Images/kb-windows-winget-submit-package-sandbox-winget-bicepInstall.png)
 
 ### Commit an push your changes
 
