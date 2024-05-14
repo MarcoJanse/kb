@@ -48,7 +48,7 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
 ### Create the winget manifest files for the installer package
 
 - On your machine, open a PowerShell prompt and enter the following: `wingetcreate update --urls <link to bicep-setup-win-x64-package> --version <versionNumber> <Winget.PackageName>`, so in this case this should be:
-  - `wingetcreate update --urls https://github.com/Azure/bicep/releases/download/v0.27.1/bicep-win-x64.exe --version 0.27.1 Microsoft.Bicep`
+  - `wingetcreate update --urls https://github.com/Azure/bicep/releases/download/v0.27.1/bicep-setup-win-x64.exe --version 0.27.1 Microsoft.Bicep`
 - This will create the following manifest files on your PC in the `C:\Users\<username>\manifests\m\Microsoft\Bicep\<0.xx.x>`
   - Microsoft.Bicep.installer.yaml
   - Microsoft.Bicep.locale.en-US.yaml
