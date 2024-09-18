@@ -39,19 +39,24 @@ The example below is for submitting an update to Bicep Cli to the WinGet reposit
 
 For the Bicep Cli, I have subscribed to the repository's releases using the *watch* option - *custom* and selecting only `releases`
 
-The instructions below are based on the release of [Bicep v0.27.1](https://github.com/Azure/bicep/releases/tag/v0.27.1)
+The instructions below are based on the release of [Bicep v0.30.3](https://github.com/Azure/bicep/releases/tag/v0.30.3)
 
 - Check the open Pull requests on [microsoft/winget-pkgs on GitHub](https://github.com/microsoft/winget-pkgs/pulls), to make sure nobody has already submitted this package
   - Use this as a search filter: `is:pr is:open "bicep" in:title`
-- On the release page of Bicep v.0.18.4, find the `bicep-setup-win-x64.exe` package and copy the link for the next step
+- On the [release page of Bicep](https://github.com/Azure/bicep/releases) find the latest release and use the installer URLs in the next step.
 
 > **IMPORTANT:** Make sure you copy the `bicep-setup-win-64.exe` and not the bicep-win64.exe
 
 ### Create the winget manifest files for the installer package
 
-- On your machine, open a PowerShell prompt and enter the following: `wingetcreate update --urls <link to bicep-setup-win-x64-package> --version <versionNumber> <Winget.PackageName>`, so in this case this should be:
-  - `wingetcreate update --urls https://github.com/Azure/bicep/releases/download/v0.27.1/bicep-setup-win-x64.exe --version 0.27.1 Microsoft.Bicep`
-- This will create the following manifest files on your PC in the `C:\Users\<username>\manifests\m\Microsoft\Bicep\<0.xx.x>`
+- On your machine, open a PowerShell prompt and enter the following: `wingetcreate update <Winget.PackageName> --version <versionNumber> --interactive`, so in this case this should be:
+  - `wingetcreate update microsoft.bicep --version 0.30.3 --interactive`
+- The Interactive installer will ask you for the 3 URIs for the installer in 3 steps:
+  - **ARM64** For example: `https://github.com/Azure/bicep/releases/download/v0.30.3/bicep-win-arm64.exe`
+  - **X64** For example: `https://github.com/Azure/bicep/releases/download/v0.30.3/bicep-win-x64.exe`
+  - **inno** For example: `https://github.com/Azure/bicep/releases/download/v0.30.3/bicep-setup-win-x64.exe`
+- Do not choose the submit option, we will do that later.
+- This will create the following manifest files on your PC in the `C:\Users\<username>\manifests\m\Microsoft\Bicep\<0.xx.x>` (if your working directory is `C:\Users\<username>`)
   - Microsoft.Bicep.installer.yaml
   - Microsoft.Bicep.locale.en-US.yaml
   - Microsoft.Bicep.yaml
@@ -62,8 +67,8 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
 - In VSCode, open your fork repository
   - Make sure you are in the main/master branch
 - Create a new branch from main/master.
-  - In this case, I named the branch `feat-microsoft-bicep-v0.27.1`
-- Switch to the new branch and create a new folder called `manifests\m\Microsoft\Bicep\0.27.1`
+  - In this case, I named the branch `feat-microsoft-bicep-v0.30.3`
+- Switch to the new branch and create a new folder called `manifests\m\Microsoft\Bicep\0.30.3`
 - Copy the 3 manifest files in this folder.
 - Modify the following:
   - `Microsoft.Bicep.installer.yaml`
@@ -99,7 +104,7 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
       ```
 
     - Add a `ReleaseNotesUrl` parameter, for example:
-      - `ReleaseNotesUrl: https://github.com/Azure/bicep/releases/tag/v0.27.1`
+      - `ReleaseNotesUrl: https://github.com/Azure/bicep/releases/tag/v0.30.3`
 - Save the files and do not commit them yet.
 
 ### Validate the manifest files
@@ -108,7 +113,7 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
 - Validate your manifest files using winget cli.
   - **Be sure to validate the modified manifest files in your git branch, not the original location**
   - For example:
-    - `winget validate X:\git\GitHub\MarcoJanse\winget-pkgs\manifests\m\Microsoft\Bicep\0.27.1\`
+    - `winget validate X:\git\GitHub\MarcoJanse\winget-pkgs\manifests\m\Microsoft\Bicep\0.30.3\`
 - If everything is alright, it should say *`Manifest validation succeeded`*
 
 ### Test the manifest with Windows Sandbox
@@ -117,12 +122,12 @@ The instructions below are based on the release of [Bicep v0.27.1](https://githu
 - **Make sure you are still in the branch with the new manifest files, and not in master/main branch.**
   - For example: `cd X:\git\github\MarcoJanse\winget-pkgs\Tools\`
 - Run the following to test the installation of Bicep using the manifest file in Windows Sandbox environment
-  - `.\SandboxTest.ps1 ..\manifests\m\Microsoft\Bicep\0.27.1\`
+  - `.\SandboxTest.ps1 ..\manifests\m\Microsoft\Bicep\0.30.3\`
 - This will list the output below, open a Windows Sandbox environment where you should see a successful installation of the Bicep Cli.
 - If you don't see a successful installation, create a new issue in the source repository, in this case. [Azure/Bicep: Issues](https://github.com/Azure/bicep/issues)
 
 ```powershell
-─ .\SandboxTest.ps1 ..\manifests\m\Microsoft\Bicep\0.27.1\                                 
+─ .\SandboxTest.ps1 ..\manifests\m\Microsoft\Bicep\0.30.3\                                 
 --> Validating Manifest
 Manifest validation succeeded.
 
@@ -133,7 +138,7 @@ Manifest validation succeeded.
       - C:\git\GitHub\MarcoJanse\winget-pkgs\Tools as read-and-write
     - Installing WinGet
     - Configuring Winget
-    - Installing the Manifest 0.27.1
+    - Installing the Manifest 0.30.3
     - Refreshing environment variables
     - Comparing ARP Entries
 ```
@@ -145,7 +150,7 @@ Below is a screenshot of the sandbox and it's output if everything works.
 ### Commit an push your changes
 
 - In VSCode, in your branch commit the 3 files and enter a commit message:
-  - For example: `feat: microsoft-bicep-v0.27.1`
+  - For example: `feat: microsoft-bicep-v0.30.3`
 - Sync/pull changes to the remote repository.
   - Make sure you sync to your forked branch, not the original.
 
@@ -157,7 +162,7 @@ Below is a screenshot of the sandbox and it's output if everything works.
 - You should automatically get a compare between your commit and the base repository (microsoft/winget-pkgs) on the master/main branch.
 - Verify the following:
   - base repository: `microsoft/winget-pkgs` and base: `master`
-  - head repository: `MarcoJanse/winget-pkgs` and base: `feat-microsoft-bicep-v0.27.1`
+  - head repository: `MarcoJanse/winget-pkgs` and base: `feat-microsoft-bicep-v0.30.3`
   - *Able to merge* message is displayed
 - Select ***[Create Pull Request]***
 - Review all the questions and put an `x` between the brackets when it's okay.
