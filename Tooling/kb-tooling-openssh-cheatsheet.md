@@ -1,6 +1,6 @@
 # OpenSSH cheat sheet
 
-## Create RSA SSH key that's compattible with Azure
+## Create RSA SSH key that's compatible with Azure
 
 * Open PowerShell on a system with OpenSSH installed
   * `ssh-keygen -m PEM -t rsa -b 4096`
